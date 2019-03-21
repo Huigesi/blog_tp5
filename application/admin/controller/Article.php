@@ -1,13 +1,13 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
-use app\Admin\model\Links as LinksModel;
+use app\Admin\model\Article as ArticleModel;
 use app\admin\controller\Base;
-class Links extends Controller
+class Article extends Controller
 {
     public function lst()
     {
-    	$list = LinksModel::paginate(3);
+    	$list = ArticleModel::paginate(3);
     	$this->assign('list',$list);
         return $this->fetch();
     }
@@ -21,23 +21,25 @@ class Links extends Controller
                 'url'=>input('url'),
     			'desc'=>input('desc'),
     		];
-    		$validate = \think\Loader::validate('links');
+    		$validate = \think\Loader::validate('Article');
     		if(!$validate->scene('add')->check($data)){
 			   $this->error($validate->getError()); die;
 			}
-    		if(db('links')->insert($data)){
-    			return $this->success('添加链接成功！','lst');
+    		if(db('Article')->insert($data)){
+    			return $this->success('添加文章成功！','lst');
     		}else{
-    			return $this->error('添加链接失败！');
+    			return $this->error('添加文章失败！');
     		}
     		return;
     	}
+        $cateres = db('cate')->select();
+        $this->assign('cateres', $cateres);
         return $this->fetch();
     }
 
     public function edit(){
     	$id=input('id');
-    	$Links=db('links')->find($id);
+    	$articles=db('article')->find($id);
     	if(request()->isPost()){
     		$data=[
     			'id'=>input('id'),
@@ -45,27 +47,27 @@ class Links extends Controller
                 'url'=>input('url'),
     			'desc'=>input('desc'),
     		];
-			$validate = \think\Loader::validate('links');
+			$validate = \think\Loader::validate('Article');
     		if(!$validate->scene('edit')->check($data)){
 			   $this->error($validate->getError()); die;
 			}
-    		if(db('links')->update($data)){
-    			$this->success('修改链接成功！','lst');
+    		if(db('article')->update($data)){
+    			$this->success('修改文章成功！','lst');
     		}else{
-    			$this->error('修改链接失败！');
+    			$this->error('修改文章失败！');
     		}
     		return;
     	}
-    	$this->assign('links',$Links);
+    	$this->assign('articles',$articles);
     	return $this->fetch();
     }
 
     public function del(){
     	$id=input('id');
-		if(db('links')->delete(input('id'))){
-			$this->success('删除链接成功！','lst');
+		if(db('Article')->delete(input('id'))){
+			$this->success('删除文章成功！','lst');
 		}else{
-			$this->error('删除链接失败！');
+			$this->error('删除文章失败！');
 		}
     	
     }
