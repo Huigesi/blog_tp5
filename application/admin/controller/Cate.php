@@ -21,7 +21,6 @@ class Cate extends Controller
         if (request()->isPost()) {
             $data = [
                 'catename' => input('catename'),
-                //'password' => (input('password')),
             ];
 
             $validate = \think\Loader::validate('Cate');
@@ -31,7 +30,7 @@ class Cate extends Controller
                 die;
             }
 
-            if (Db::name('cate')->insert($data)) {
+            if (db('cate')->insert($data)) {
                 return $this->success("添加栏目成功", 'lst');
             } else {
                 return $this->error("添加栏目失败");
@@ -46,23 +45,19 @@ class Cate extends Controller
     {
         $id = input('id');
         $cates = db('cate')->find($id);
-        $data = [
-            'id' => input('id'),
-            'username' => input('username'),
-        ];
-        if (input('password')) {
-            $data['password'] = md5(input('password'));
-        } else {
-            $data['password'] = $cates['password'];
-        }
-        $validate = \think\Loader::validate('Cate');
-        $result = $validate->scene('edit')->check($data);
-        if (!$validate->check($data)) {
-            $this->error($validate->getError());
-            die;
-        }
         if (request()->isPost()) {
-            if (db('cate')->update($data)) {
+            $data = [
+                'id' => input('id'),
+                'catename' => input('catename'),
+            ];
+            $validate = \think\Loader::validate('Cate');
+            $result = $validate->scene('edit')->check($data);
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+                die;
+            }
+            $save = db('cate')->update($data);
+            if ($save !== false) {
                 $this->success("修改栏目信息成功", "lst");
             } else {
                 $this->error("修改栏目信息失败");

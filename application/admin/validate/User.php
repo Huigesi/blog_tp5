@@ -18,7 +18,7 @@ class User extends Validate
     ];
 
     protected $scene = [
-        'add'  =>  ['username','password'=>'require|number'],
+        'add'  =>  ['username','password'=>'require'],
         'edit'  =>  ['username',],
     ];
 }
