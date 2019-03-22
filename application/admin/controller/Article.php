@@ -76,9 +76,11 @@ class Article extends Controller
             if (input('state') == 'on') {
                 $data['state'] = 1;
             }
-
+            $path = ROOT_PATH . "/public" . $articles['pic'];
             if ($_FILES['pic']['tmp_name']) {
-                unlink(ROOT_PATH."/public".$articles['pic']);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
                //dump(SITE_URL.'/public'.$articles['pic']); die;
                 $file = request()->file('pic');
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static/uploads');
