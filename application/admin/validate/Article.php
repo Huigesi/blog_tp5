@@ -5,19 +5,19 @@ class Article extends Validate
 {
     protected $rule = [
         'title'  =>  'require|max:25',
-        'url' =>  'require',
+        'cateid' =>  'require',
     ];
 
     protected $message  =   [
         'title.require' => '链接标题必须填写',
         'title.max' => '链接标题长度不得大于25位',
-        'url.require' => '链接地址必须填写',
+        'cateid.require' => '请选择文章所属栏目',
 
     ];
 
     protected $scene = [
-        'add'  =>  ['title','url'],
-        'edit'  =>  ['title','url'],
+        'add'  =>  ['title','cateid'],
+        'edit'  =>  ['title','cateid'],
     ];
 
 

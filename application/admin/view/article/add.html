@@ -116,7 +116,7 @@
                             </div>
                             <div class="widget-body">
                                 <div id="horizontal-form">
-                                    <form class="form-horizontal" role="form" action="" method="post">
+                                    <form class="form-horizontal" role="form" enctype="multipart/form-data" action="" method="post">
                                         <div class="form-group">
                                             <label for="username"
                                                    class="col-sm-2 control-label no-padding-right">文章标题</label>
@@ -131,7 +131,7 @@
                                             <label for="group_id"
                                                    class="col-sm-2 control-label no-padding-right">文章作者</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control" id="url" placeholder="" name="url"
+                                                <input class="form-control" id="author" placeholder="" name="author"
                                                        type="text">
                                             </div>
                                         </div>
@@ -139,7 +139,7 @@
                                             <label for="group_id"
                                                    class="col-sm-2 control-label no-padding-right">关键字</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control" id="url" placeholder="" name="url"
+                                                <input class="form-control" id="keywords" placeholder="" name="keywords"
                                                        type="text">
                                             </div>
                                         </div>
@@ -156,21 +156,21 @@
                                             <label for="group_id"
                                                    class="col-sm-2 control-label no-padding-right">缩略图 </label>
                                             <div class="col-sm-6">
-                                                <input class="form-control" id="url" placeholder="" name="url"
-                                                       type="file">
+                                                <input id="pic" placeholder="" name="pic"  type="file">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="group_id"
                                                    class="col-sm-2 control-label no-padding-right">所属栏目</label>
                                             <div class="col-sm-6">
-                                                <select>
-                                                    <option>请选择栏目</option>
+                                                <select name="cateid">
+                                                    <option value="">请选择栏目</option>
                                                     {volist name="cateres" id="vo"}
                                                     <option value="{vo.id}">{$vo.catename}</option>
                                                     {/volist}
                                                 </select>
                                             </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
                                         </div>
                                         <div class="form-group">
                                             <label for="group_id"
@@ -178,7 +178,7 @@
                                             <div class="col-sm-6">
                                                 <label>
                                                     <input class="checkbox-slider colored-darkorange" type="checkbox"
-                                                           checked="on">
+                                                           name="state">
                                                     <span class="text"></span>
                                                 </label>
                                             </div>
