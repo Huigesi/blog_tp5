@@ -89,4 +89,9 @@ class Admin extends Controller
             $this->error("初始管理员不得删除");
         }
     }
+    public function logout()
+    {
+        session(null);
+        $this->success('退出成功','Login/index');
+    }
 }

@@ -240,4 +240,13 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    'captcha'  =>[
+        'fontSize' => 20,
+        'useCurve' => true,
+        'imageH' => 40,
+        'imageW' => 130,
+        'length' =>4,
+        'reset' => true,
+    ]
 ];

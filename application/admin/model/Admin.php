@@ -8,6 +8,10 @@ class Admin extends Model
 {
     public function login($data)
     {
+        $captcha = new \think\captcha\Captcha();
+        if (!$captcha->check($data['code'])) {
+            return 4;
+        }
         $user = Db::name('admin')->where('username','=',$data['username'])->find();
         if ($user) {
             if ($user['password']==md5($data['password'])) {
