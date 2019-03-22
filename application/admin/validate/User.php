@@ -7,7 +7,7 @@ use think\Validate;
 class User extends Validate
 {
     protected $rule = [
-        'username' => 'require|max:25',
+        'username' => 'require|max:25|unique:admin',
         'password' => 'require',
     ];
 
@@ -18,7 +18,7 @@ class User extends Validate
     ];
 
     protected $scene = [
-        'add'  =>  ['username','password'=>'require'],
-        'edit'  =>  ['username',],
+        'add'  =>  ['username'=>'unique:admin','password'],
+        'edit'  =>  ['username'=>'require|unique:admin',],
     ];
 }

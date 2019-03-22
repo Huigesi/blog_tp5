@@ -75,6 +75,8 @@ class Article extends Controller
             ];
             if (input('state') == 'on') {
                 $data['state'] = 1;
+            }else{
+                $data['state'] = 0;
             }
             $path = ROOT_PATH . "/public" . $articles['pic'];
             if ($_FILES['pic']['tmp_name']) {

@@ -47,23 +47,24 @@ class Admin extends Controller
     {
         $id = input('id');
         $admins = db('admin')->find($id);
-        $data = [
-            'id' => input('id'),
-            'username' => input('username'),
-        ];
-        if (input('password')) {
-            $data['password'] = md5(input('password'));
-        } else {
-            $data['password'] = $admins['password'];
-        }
-        $validate = \think\Loader::validate('User');
-        $result = $validate->scene('edit')->check($data);
-        if (!$validate->check($data)) {
-            $this->error($validate->getError());
-            die;
-        }
         if (request()->isPost()) {
-            if (db('admin')->update($data)) {
+            $data = [
+                'id' => input('id'),
+                'username' => input('username'),
+            ];
+            if (input('password')) {
+                $data['password'] = md5(input('password'));
+            } else {
+                $data['password'] = $admins['password'];
+            }
+            $validate = \think\Loader::validate('User');
+            $result = $validate->scene('edit')->check($data);
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+                die;
+            }
+            $save = db('admin')->update($data);
+            if ($save!==false) {
                 $this->success("修改管理员信息成功", "lst");
             } else {
                 $this->error("修改管理员信息失败");
