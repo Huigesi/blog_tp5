@@ -10,7 +10,11 @@ class Base extends Controller
     {
         $this->right();
         $cateres = db('cate')->order('id asc')->select();
-        $this->assign('cateres', $cateres);
+        $tags = db('tags')->order('id asc')->select();
+        $this->assign(array(
+            'cateres'=>$cateres,
+            'tags'=>$tags
+        ));
     }
 
     public function right()

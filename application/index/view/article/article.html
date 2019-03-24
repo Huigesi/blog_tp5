@@ -71,8 +71,9 @@
             </div>
             <div class="rig">
                 <ul>
-                    <li><a href='__PUBLIC__/images/20160907155021.html' target="_blank">蓝牙耳机怎么和手机连接 连接手机及电脑的方法</a></li>
-
+                    {volist name="ralateres" id="vo"}
+                    <li><a href="{:url('article/index',array('articleid'=>$vo[0]))}" target="_blank">{$vo.1}</a></li>
+                    {/volist}
                 </ul>
             </div>
         </div>
