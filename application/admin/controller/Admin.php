@@ -2,13 +2,13 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
 use think\Db;
 use app\admin\model\Admin as AdminModel;
-use think\Request;
+use app\admin\controller\Base;
 
-class Admin extends Controller
+class Admin extends Base
 {
+
     public function lst()
     {
         $list = AdminModel::paginate(3);
