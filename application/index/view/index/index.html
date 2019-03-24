@@ -31,7 +31,14 @@
                 <h3><a target="_blank" href="{:url('article/index',array('articleid'=>$vo['id']))}">{$vo.title}</a></h3>
                 <div class="time">发布时间：{$vo.time|date="Y-m-d",###}</div>
                 {$vo.desc}
-                <div class="time"></div>
+                <div class="time">
+                    <?php
+                    $arr=explode(',',$vo['keywords']);
+                    foreach($arr as $k => $v){
+                    echo "<a href='#'>$v</a>";
+                    }
+                    ?>
+                </div>
             </div>
         </div>
         {/volist}

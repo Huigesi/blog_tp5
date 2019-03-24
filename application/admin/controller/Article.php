@@ -25,7 +25,7 @@ class Article extends Base
                 'title' => input('title'),
                 'author' => input('author'),
                 'desc' => input('desc'),
-                'keywords' => input('keywords'),
+                'keywords' => str_replace('，', ',', input('keywords')),
                 'content' => input('content'),
                 'cateid' => input('cateid'),
                 'time' => time(),
@@ -39,7 +39,7 @@ class Article extends Base
                     $info = $file->move(ROOT_PATH . 'public' . DS . 'static/uploads');
                     $data['pic'] = '/static/uploads/' . $info->getSaveName();
                 }
-        }
+            }
 
             $validate = \think\Loader::validate('Article');
             if (!$validate->scene('add')->check($data)) {
@@ -68,13 +68,13 @@ class Article extends Base
                 'title' => input('title'),
                 'author' => input('author'),
                 'desc' => input('desc'),
-                'keywords' => input('keywords'),
+                'keywords' => str_replace('，', ',', input('keywords')),
                 'content' => input('content'),
                 'cateid' => input('cateid'),
             ];
             if (input('state') == 'on') {
                 $data['state'] = 1;
-            }else{
+            } else {
                 $data['state'] = 0;
             }
             $path = ROOT_PATH . "/public" . $articles['pic'];
@@ -82,7 +82,7 @@ class Article extends Base
                 if (file_exists($path)) {
                     unlink($path);
                 }
-               //dump(SITE_URL.'/public'.$articles['pic']); die;
+                //dump(SITE_URL.'/public'.$articles['pic']); die;
                 $file = request()->file('pic');
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static/uploads');
                 $data['pic'] = '/static/uploads/' . $info->getSaveName();
